@@ -18,18 +18,6 @@ class MonitorPositionApp extends Application.AppBase {
 
     function initialize() {
         AppBase.initialize();
-        /*sensorIterator = sensor.getRegisteredSensors(null);
-        while (	true ) {
-        	sensorInfo = sensorIterator.next();
-        	if ( sensorInfo has :name ) {
-        		Toybox.System.println(sensorInfo.name);
-        	} else {
-        	    break;
-        	}
-        }*/
-        /*sensorInfo = new Sensor.Info();
-        Toybox.System.println(sensorInfo.accel);
-        Toybox.System.println(sensorInfo.mag);*/
     }
 
     // onStart() is called on application start up
