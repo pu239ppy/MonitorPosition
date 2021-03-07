@@ -24,14 +24,7 @@ class MonitorPositionView extends WatchUi.View {
     function onLayout(dc) {
         setLayout(Rez.Layouts.MainLayout(dc));
     }
-
-	function formatString(x, y, z, p, r) {
-		var string = Lang.format(
-			"X: $1$\nY: $2$\nZ: $3$\nP: $4$\nR: $5$",
-			[x, y, z, p, r]);
-			return string;
-	}
-
+	
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
@@ -60,6 +53,13 @@ class MonitorPositionView extends WatchUi.View {
     function onHide() {
     }
 
+	function formatXYZ(mez, x, y, z) {
+		var string = Lang.format(
+			"$1$x: $2$ $1$y: $3$ $1$z: $4$",
+			[mez, x, y, z]);
+			return string;
+	}
+
     
 	function accelData(sensorData) {
 	    Ax = sensorData.accel[0];
@@ -68,6 +68,7 @@ class MonitorPositionView extends WatchUi.View {
    		Toybox.System.println("Ax: " + Ax);
    		Toybox.System.println("Ay: " + Ay);
    		Toybox.System.println("Az: " + Az);
+   		return formatXYZ("A", Ax, Ay, Az);
    	}
    		
 	function magData(sensorData) {
@@ -77,44 +78,24 @@ class MonitorPositionView extends WatchUi.View {
    		Toybox.System.println("Mx: " + Mx);
    		Toybox.System.println("My: " + My);
    		Toybox.System.println("Mz: " + Mz);
+   		return formatXYZ("M", Mx, My, Mz);
 	}
 
     function sensorCallBack(sensorData) {
-    	System.println(sensorData.toString());
-		System.println(sensorData instanceof Lang.Dictionary); 
-		System.println(sensorData instanceof Lang.Array);
-		System.println(sensorData instanceof Lang.Method);
-		System.println(sensorData instanceof Lang.Symbol);
+    	var posString = "";
+    	var magString = "";
 		System.println(sensorData has :accel and :accel != null);
 		if (sensorData has :accel and sensorData.accel != null) {
-			accelData(sensorData);
+			posString = accelData(sensorData);
 		}
 		System.println(sensorData has :mag and :mag !=null);
 		if (sensorData has :mag and sensorData.mag !=null) {
-			magData(sensorData);
+			magString = magData(sensorData);
 		}
-	}
-    
-    function accelCallback(sensorData) {
-    	X = sensorData.accelerometerData.x.slice(-1, null)[0];
- 		Y = sensorData.accelerometerData.y.slice(-1, null)[0];
-   		Z = sensorData.accelerometerData.z.slice(-1, null)[0];
-   		pitch = sensorData.accelerometerData.pitch.slice(-1, null)[0];
-   		roll = sensorData.accelerometerData.roll.slice(-1, null)[0];
-   		Toybox.System.println("X: " + X);
-   		Toybox.System.println("Y: " + Y);
-   		Toybox.System.println("Z: " + Z);
-   		Toybox.System.println("P: " + pitch);
-   		Toybox.System.println("R: " + roll);
-   		Toybox.System.println("Num samples: " + sensorData.accelerometerData.x.size());
-   		
-   		sensorInfo = new Sensor.Info();
-        Toybox.System.println(sensorInfo.accel);
-        Toybox.System.println(sensorInfo.mag);
-   		
-   		accData = formatString(X, Y, Z, pitch, roll);
-   		Toybox.System.println(accData);
-   		myText.setText(accData);
+		
+		myText.setText(posString + "\n" + magString);
    		requestUpdate();
+		
+		
 	}
 }
