@@ -1,20 +1,12 @@
 using Toybox.WatchUi;
-using Toybox.Lang;
 using Toybox.Sensor;
 
 class AccelerometerView extends WatchUi.View {
-
-	var X = null;
-	var Y = null;
-	var Z = null;
-	
-	var Ax, Ay, Az, Mx, My, Mz = null;
-	
+	var Ax, Ay, Az = null;
 	var pitch = null;
 	var roll = null;
-	hidden var accData;
-  	var sensorInfo;
-  	var myText;
+  	var acText;
+	var visible = false;
 
     function initialize() {
         View.initialize();
@@ -30,8 +22,8 @@ class AccelerometerView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() {
-    	myText = new WatchUi.TextArea({
-        	:text=>"Loading",
+    	acText = new WatchUi.TextArea({
+        	:text=>"Loading Accelerometer",
         	:color=>Graphics.COLOR_WHITE,
         	:font=>Graphics.FONT_SMALL,
         	:locX =>WatchUi.LAYOUT_HALIGN_CENTER,
@@ -39,19 +31,21 @@ class AccelerometerView extends WatchUi.View {
         	:width=>160,
             :height=>160
         });
+        visible = true;
     }
 
 
     function onUpdate(dc) {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
-        myText.draw(dc);
+        acText.draw(dc);
     }
 
     // Called when this View is removed from the screen. Save the
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() {
+    	visible = false;
     }
 
 	function pitchRoll(x, y) {
@@ -77,10 +71,10 @@ class AccelerometerView extends WatchUi.View {
     function sensorCallBack(sensorData) {
     	var posString = "";
     	var pitchRollStr = "";
-		if (sensorData has :accel and sensorData.accel != null) {
+		if (visible and sensorData has :accel and sensorData.accel != null) {
 			posString = accelData(sensorData);
 			pitchRollStr = pitchRoll(sensorData.accel[0], sensorData.accel[1]);
-			myText.setText(posString + "\n" + pitchRollStr);
+			acText.setText(posString + "\n" + pitchRollStr);
    			requestUpdate();
 		}
 	}

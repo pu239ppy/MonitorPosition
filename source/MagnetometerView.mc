@@ -1,20 +1,10 @@
 using Toybox.WatchUi;
-using Toybox.Lang;
 using Toybox.Sensor;
 
 class MagnetometerView extends WatchUi.View {
-
-	var X = null;
-	var Y = null;
-	var Z = null;
-	
-	var Ax, Ay, Az, Mx, My, Mz = null;
-	
-	var pitch = null;
-	var roll = null;
-	hidden var accData;
-  	var sensorInfo;
-  	var myText;
+	var Mx, My, Mz = null;
+  	var magText;
+  	var visible = false;
 
     function initialize() {
         View.initialize();
@@ -29,8 +19,8 @@ class MagnetometerView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() {
-    	myText = new WatchUi.TextArea({
-        	:text=>"Loading",
+    	magText = new WatchUi.TextArea({
+        	:text=>"Loading Magnetometer",
         	:color=>Graphics.COLOR_WHITE,
         	:font=>Graphics.FONT_SMALL,
         	:locX =>WatchUi.LAYOUT_HALIGN_CENTER,
@@ -38,18 +28,20 @@ class MagnetometerView extends WatchUi.View {
         	:width=>160,
             :height=>160
         });
+        visible = true;
     }
 
     function onUpdate(dc) {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         dc.clear();
-        myText.draw(dc);
+        magText.draw(dc);
     }
 
     // Called when this View is removed from the screen. Save the
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() {
+    	visible = false;
     }
   		
 	function magData(sensorData) {
@@ -64,10 +56,9 @@ class MagnetometerView extends WatchUi.View {
 
     function sensorCallBack(sensorData) {
     	var magString = "";
-    	var pitchRollStr = "";
-		if (sensorData has :mag and sensorData.mag !=null) {
+		if (visible and sensorData has :mag and sensorData.mag !=null) {
 			magString = magData(sensorData);
-			myText.setText(magString);
+			magText.setText(magString);
    			requestUpdate();
 		}
 	}
