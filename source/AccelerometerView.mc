@@ -18,6 +18,7 @@ class AccelerometerView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
+        
     }
 
     // Load your resources here
@@ -53,13 +54,6 @@ class AccelerometerView extends WatchUi.View {
     function onHide() {
     }
 
-	function formatXYZ(mez, x, y, z) {
-		var string = Lang.format(
-			"$1$x: $2$ $1$y: $3$ $1$z: $4$",
-			[mez, x, y, z]);
-			return string;
-	}
-
 	function pitchRoll(x, y) {
    		// Pithch atan2(y, sqrt(x^2 + z^2))
    		var pitch = Math.atan2(Ay, Math.sqrt(Math.pow(Ax, 2) + Math.pow(Ay, 2)));
@@ -80,33 +74,14 @@ class AccelerometerView extends WatchUi.View {
    		return formatXYZ("A", Ax, Ay, Az);
    	}
    		
-	function magData(sensorData) {
-		Mx = sensorData.mag[0];
- 		My = sensorData.mag[1];
-   		Mz = sensorData.mag[2];
-   		Toybox.System.println("Mx: " + Mx);
-   		Toybox.System.println("My: " + My);
-   		Toybox.System.println("Mz: " + Mz);
- 
-   		 
-   		return formatXYZ("M", Mx, My, Mz);
-	}
-
     function sensorCallBack(sensorData) {
     	var posString = "";
-    	var magString = "";
     	var pitchRollStr = "";
 		if (sensorData has :accel and sensorData.accel != null) {
 			posString = accelData(sensorData);
 			pitchRollStr = pitchRoll(sensorData.accel[0], sensorData.accel[1]);
+			myText.setText(posString + "\n" + pitchRollStr);
+   			requestUpdate();
 		}
-		/*if (sensorData has :mag and sensorData.mag !=null) {
-			magString = magData(sensorData);
-		}*/
-		
-		myText.setText(posString + "\n" + pitchRollStr);
-   		requestUpdate();
-		
-		
 	}
 }

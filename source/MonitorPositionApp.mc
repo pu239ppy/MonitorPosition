@@ -2,18 +2,8 @@ using Toybox.Application;
 using Toybox.Sensor;
 
 class MonitorPositionApp extends Application.AppBase {
-
-	var sensorOptions = {
-	    :period => 1,               // 1 second sample time
-	    :accelerometer => {
-	        :enabled => true,       // Enable the accelerometer
-	        :sampleRate => 25,       // 25 samples
-	        :includePitch => true,
-	        :includeRoll => true
-	    }
-	};
- 	var _aview = new AccelerometerPositionView();
- 	var _mview = new MagnetometerPositionView();
+ 	var views = [new AccelerometerView(), new MagnetometerView()];
+	var currentView = 0;
 	var sensorIterator;
 	//var sensorInfo;
 
@@ -32,9 +22,13 @@ class MonitorPositionApp extends Application.AppBase {
     // Return the initial view of your application here
     function getInitialView() {
     	//Sensor.registerSensorDataListener(_view.method(:accelCallback), sensorOptions);
-    	Sensor.enableSensorEvents(_aview.method(:sensorCallBack));
-        return [ _aview ];
+    	Sensor.enableSensorEvents(sensorCallBack(:sensorCallBack));
+        return [ views[currentView], new PositionBehaviorDelegate() ];
     }
+    
+    function sensorCallBack(sensorData) {
+		views[currentView].sensorCallBack(sensorData);
+   	}
     
     function formatXYZ(mez, x, y, z) {
 		var string = Lang.format(
