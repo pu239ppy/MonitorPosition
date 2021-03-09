@@ -12,7 +12,8 @@ class MonitorPositionApp extends Application.AppBase {
 	        :includeRoll => true
 	    }
 	};
- 	var _view = new MonitorPositionView();
+ 	var _aview = new AccelerometerPositionView();
+ 	var _mview = new MagnetometerPositionView();
 	var sensorIterator;
 	//var sensorInfo;
 
@@ -31,7 +32,14 @@ class MonitorPositionApp extends Application.AppBase {
     // Return the initial view of your application here
     function getInitialView() {
     	//Sensor.registerSensorDataListener(_view.method(:accelCallback), sensorOptions);
-    	Sensor.enableSensorEvents(_view.method(:sensorCallBack));
-        return [ _view ];
+    	Sensor.enableSensorEvents(_aview.method(:sensorCallBack));
+        return [ _aview ];
     }
+    
+    function formatXYZ(mez, x, y, z) {
+		var string = Lang.format(
+			"$1$x: $2$ $1$y: $3$ $1$z: $4$",
+			[mez, x, y, z]);
+			return string;
+	}
 }
