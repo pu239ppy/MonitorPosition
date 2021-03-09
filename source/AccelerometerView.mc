@@ -2,7 +2,7 @@ using Toybox.WatchUi;
 using Toybox.Lang;
 using Toybox.Sensor;
 
-class MonitorPositionView extends WatchUi.View {
+class AccelerometerView extends WatchUi.View {
 
 	var X = null;
 	var Y = null;
