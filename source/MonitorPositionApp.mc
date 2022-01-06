@@ -3,7 +3,7 @@ using Toybox.Sensor;
 using Toybox.Lang;
 
 var currentView = 0;
-var views = [new AccelerometerView(), new MagnetometerView()];
+var views = [new AccelerometerView(), new MagnetometerView(), new AltitudeView()];
 
 function formatXYZ(mez, x, y, z) {
 	var string = Lang.format(
