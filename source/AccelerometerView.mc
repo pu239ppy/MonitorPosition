@@ -50,9 +50,9 @@ class AccelerometerView extends WatchUi.View {
 
 	function pitchRoll(x, y) {
    		// Pithch atan2(y, sqrt(x^2 + z^2))
-   		var pitch = Math.atan2(Ay, Math.sqrt(Math.pow(Ax, 2) + Math.pow(Ay, 2)));
+   		var pitch = 180 * Math.atan2(Ay, Math.sqrt(Math.pow(Ax, 2) + Math.pow(Az, 2))) / Math.PI;
 		// roll  atan2(-x, z)
-		var roll = Math.atan2(-(Ax), Ay);
+		var roll = 180 * Math.atan2(-(Ax), Az) / Math.PI;
 		Toybox.System.println("P: " + pitch);
 		Toybox.System.println("R: " + roll);
 		return Lang.format("Pitch: $1$, Roll: $2$", [x,y]);
