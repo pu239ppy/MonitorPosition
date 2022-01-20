@@ -40,9 +40,12 @@ class AltitudeView extends WatchUi.View {
     
     // Does nothing here, but is required when switching pages
     function sensorCallBack(sensorData) {
-    	Toybox.System.println("Altitude: " + sensorData.altitude);
-    	altText.setText(Lang.format("Altitude: $1$", [sensorData.altitude]));
+    	if (visible and sensorData has :altitude and sensorData.altitude !=null) {
+	    	var currentAltitude = sensorData.altitude;
+	    	Toybox.System.println("Altitude: " + currentAltitude);
+	    	altText.setText(Lang.format("Altitude: $1$", [currentAltitude]));
     	requestUpdate();
+    	}
     }
 
     // Called when this View is removed from the screen. Save the

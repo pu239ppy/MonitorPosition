@@ -62,6 +62,11 @@ class AccelerometerView extends WatchUi.View {
 	    Ax = sensorData.accel[0];
  		Ay = sensorData.accel[1];
    		Az = sensorData.accel[2];
+   		if ($.session != null) {
+	    	$.fields[:aX].setData(sensorData.accel[0]);
+	    	$.fields[:aY].setData(sensorData.accel[1]);
+	    	$.fields[:aZ].setData(sensorData.accel[2]);
+   		}
    		Toybox.System.println("Ax: " + Ax);
    		Toybox.System.println("Ay: " + Ay);
    		Toybox.System.println("Az: " + Az);

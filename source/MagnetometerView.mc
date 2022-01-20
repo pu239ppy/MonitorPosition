@@ -48,6 +48,11 @@ class MagnetometerView extends WatchUi.View {
 		Mx = sensorData.mag[0];
  		My = sensorData.mag[1];
    		Mz = sensorData.mag[2];
+   		if ($.session != null) {
+			$.fields[:mX].setData(sensorData.mag[0]);
+			$.fields[:mY].setData(sensorData.mag[1]);
+			$.fields[:mZ].setData(sensorData.mag[2]);
+   		}
    		Toybox.System.println("Mx: " + Mx);
    		Toybox.System.println("My: " + My);
    		Toybox.System.println("Mz: " + Mz);

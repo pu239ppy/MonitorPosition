@@ -1,0 +1,21 @@
+<fitContributions>
+	<fitField id="0" displayInChart="true" sortOrder = "0" precision="2"
+	chartTitle="@Strings.aX_graph_label" dataLabel="@Strings.aX_label"
+	unitLabel="@Strings.aX_units" fillColor="#FF0000" />
+	
+	<fitField id="1" displayInChart="true" sortOrder = "1" precision="2"
+	chartTitle="@Strings.aY_graph_label" dataLabel="@Strings.aY_label"
+	unitLabel="@Strings.aY_units" fillColor="#FF0000" />
+
+	<fitField id="2" displayInChart="true" sortOrder = "2" precision="2"
+	chartTitle="@Strings.aZ_graph_label" dataLabel="@Strings.aZ_label"
+	unitLabel="@Strings.aZ_units" fillColor="#FF0000" />
+	
+	<fitField id="3" displayInChart="true" sortOrder = "3" precision="2"
+	chartTitle="@Strings.mX_graph_label" dataLabel="@Strings.mX_label"
+	unitLabel="@Strings.mX_units" fillColor="#FF0000" />
+	
+	<fitField id="4" displayInChart="true" sortOrder = "4" precision="2"
+	chartTitle="@Strings.mZ_graph_label" dataLabel="@Strings.mZ_label"
+	unitLabel="@Strings.mZ_units" fillColor="#FF0000" />	
+</fitContributions>

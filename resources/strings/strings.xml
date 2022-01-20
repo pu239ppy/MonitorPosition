@@ -1,3 +1,24 @@
 <strings>
     <string id="AppName">Monitor Position</string>
+	<!--  acceleration -->
+    <string id="aX_label">aX</string>
+	<string id="aX_graph_label">aX</string>
+	<string id="aX_units">G(s)</string>
+    <string id="aY_label">aY</string>
+	<string id="aY_graph_label">aY</string>
+	<string id="aY_units">G(s)</string>
+    <string id="aZ_label">aZ</string>
+	<string id="aZ_graph_label">aZ</string>
+	<string id="aZ_units">G(s)</string>
+	
+	<!--  magnetometer -->
+    <string id="mX_label">mX</string>
+	<string id="mX_graph_label">mX</string>
+	<string id="mX_units">MG(s)</string>
+    <string id="mY_label">mY</string>
+	<string id="mY_graph_label">mY</string>
+	<string id="mY_units">MG(s)</string>
+    <string id="mZ_label">mZ</string>
+	<string id="mZ_graph_label">mZ</string>
+	<string id="mZ_units">MG(s)</string>
 </strings>

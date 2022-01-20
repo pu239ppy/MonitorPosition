@@ -1,8 +1,12 @@
 using Toybox.Application;
 using Toybox.Sensor;
 using Toybox.Lang;
+using Toybox.ActivityRecording;
+using Toybox.FitContributor;
 
 var currentView = 0;
+var session = null;
+var fields = {};
 var views = [new AccelerometerView(), new MagnetometerView(), new AltitudeView()];
 
 function formatXYZ(mez, x, y, z) {
